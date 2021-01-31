@@ -28,7 +28,7 @@ based on original Fortran code by Leo Breiman and Adele Cutler.
 Finally, the decision tree and random forest are used to predict the type of digit in each image, and I measure the overall
 accuracy, as well as the accuracy for reading each type of digit.
 
-About the Data
+About the Data  
 The MNIST data set was originally produced by the National Institute of Standards and Technology
 (NIST), and modified (hence MNIST) by Yann LeCun, Courant Institute, NYU; Corinna Cortes,
 Google Labs, New York; and Christopher J.C. Burges, Microsoft Research, Redmond (see
