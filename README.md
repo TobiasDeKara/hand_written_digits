@@ -1,39 +1,31 @@
 # hand_written_digits
 An implementation of topological data analysis for reading images from the MNIST data set
 
-I originally created and submitted this project for my course in "Statistical Programming in R" (PHP 2560) in the Fall of 2020.  I have since revised it slightly.
+This program extracts topological data from images of handwritten digits, and then applies machine learning techniques for classification.
 
-The goal was to write a program to extract topological data from images of handwritten digits, and then apply machine learning techniques using the extracted features.
-
-Below is text from the orginial submission.
-
-- - - -
-
-Tobias DeKara
-Statistical Programming in R
-Midterm Project
-"An Application of Topological Data Analysis to Handwritten Digits"
-11/3/20
+I originally created this project for my course in "Statistical Programming in R" (PHP 2560) in the Fall of 2020.  
+I have since revised it to include the use of random forests, and to streamline the code.
 
 Introduction
 My question is "Can a very basic version of topological data analysis accurately identify hand-written
 digits?"
 
 To answer this, I am using the MNIST data set, a set of gray scale images of hand-written digits (see
-"About the Data", below). The images have 784 pixels, arranged as a 28 x 28 square, and I first
-round the gray scale values to 0 or 1, representing white and black.
+"About the Data", below). The images each have 784 pixels, arranged as a 28 x 28 square.
 
-To extract topological data from the images, I calculate the Euler Characteristic (EC) of each row of
+To extract topological data from the images, I calculate the Euler Characteristic (EC) of each row and column of
 pixels. In this one dimensional case, the EC is equal to the number of separate regions of writing in
-the row. For example, '00000000111000001111000000000' corresponds to a row with 2 distinct
-sections of writing, and so the EC is equal to 2, and '0000001111000001111100001111' has an EC of
-3.
+the row. For example, if we let 0 represent a pixel without writing and 1 represent a pixel with writing,
+'00000000111000001111000000000' corresponds to a row with 2 distinct
+sections of writing, and so the EC is equal to 2. '0000001111000001111100001111' has an EC of 3.
 
-I then use the ECs as variables in a model for predicting the type of digit in the image. For the
-model, I chose to create a decision tree using recursive partitioning, implemented by the 'rpart'
-package, authored by Beth Atkinson. For an explanation of this process see step 7, below.
+I then use the ECs as variables in a pair of models for predicting the type of digit in the image.
+First, I create a decision tree using recursive partitioning, implemented by the 'rpart'
+package, authored by Beth Atkinson.  And second, I create a random forest of decision trees using
+the 'randomForest' package authored by Andy Liaw andy\_liaw@merck.com and Matthew Wiener matthew\_wiener@merck.com, 
+based on original Fortran code by Leo Breiman and Adele Cutler.
 
-Finally, the decision tree is used to predict the type of digit in each image, and I measure the overall
+Finally, the decision tree and random forest are used to predict the type of digit in each image, and I measure the overall
 accuracy, as well as the accuracy for reading each type of digit.
 
 About the Data
@@ -56,14 +48,11 @@ stored as rows of the mnist$test$images and mnist$train$images matrices. I will 
 to these rows as "image vectors". These are stored 'by row', meaning the first 28 entries of an
 image vector represent the first row of that image.
 
-The Plan
+The following is an overview of the process
 1. Read in the data
 2. Change image vectors to image matrices
-3. Change to black and white
-4. Calculate the Euler Characteristic
-5. Introduce dummy variables
-6. Add meaningful names to the data frame of EC values
-7. Make a Classification Tree using Recursive Partitioning
-8. View the decision tree
-9. Measure accuracy
-10. Visualize accuracy
+3. Calculate the Euler Characteristics
+4. Make a Classification Tree using Recursive Partitioning
+5. Create a Random Forest of Classification Trees
+6. Measure accuracy
+7. Visualize accuracy
