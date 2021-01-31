@@ -1,3 +1,10 @@
+library(parallel)
+num_cores <- detectCores()
+
+library(foreach)
+library(doParallel)
+registerDoParallel(num_cores)
+
 # Change image vectors to image matrices and select a subset of the rows and columns
 make_image_matrices <- function(image_vectors, selected_columns, selected_rows){
   n <- nrow(image_vectors)
