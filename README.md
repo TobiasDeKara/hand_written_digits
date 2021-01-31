@@ -6,7 +6,7 @@ This program extracts topological data from images of handwritten digits, and th
 I originally created this project for my course in "Statistical Programming in R" (PHP 2560) in the Fall of 2020.  
 I have since revised it to include the use of random forests, and to streamline the code.
 
-Introduction
+Introduction  
 My question is "Can a very basic version of topological data analysis accurately identify hand-written
 digits?"
 
